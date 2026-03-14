@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+    "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+    <!-- ── App Identity ──────────────────────────────────────────────────── -->
+    <key>CFBundleDevelopmentRegion</key>
+    <string>$(DEVELOPMENT_LANGUAGE)</string>
+
+    <key>CFBundleDisplayName</key>
+    <string>CoreBrain</string>
+
+    <key>CFBundleExecutable</key>
+    <string>$(EXECUTABLE_NAME)</string>
+
+    <key>CFBundleIdentifier</key>
+    <string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
+
+    <key>CFBundleInfoDictionaryVersion</key>
+    <string>6.0</string>
+
+    <key>CFBundleName</key>
+    <string>corebrain</string>
+
+    <key>CFBundlePackageType</key>
+    <string>APPL</string>
+
+    <key>CFBundleShortVersionString</key>
+    <string>$(FLUTTER_BUILD_NAME)</string>
+
+    <key>CFBundleSignature</key>
+    <string>????</string>
+
+    <key>CFBundleVersion</key>
+    <string>$(FLUTTER_BUILD_NUMBER)</string>
+
+    <!-- ── UI / Orientation ───────────────────────────────────────────────── -->
+    <key>UILaunchStoryboardName</key>
+    <string>LaunchScreen</string>
+
+    <key>UIMainStoryboardFile</key>
+    <string>Main</string>
+
+    <key>UISupportedInterfaceOrientations</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+
+    <key>UISupportedInterfaceOrientations~ipad</key>
+    <array>
+        <string>UIInterfaceOrientationPortrait</string>
+        <string>UIInterfaceOrientationPortraitUpsideDown</string>
+        <string>UIInterfaceOrientationLandscapeLeft</string>
+        <string>UIInterfaceOrientationLandscapeRight</string>
+    </array>
+
+    <key>UIViewControllerBasedStatusBarAppearance</key>
+    <false/>
+
+    <!-- ── Network: Zero-Internet Policy ────────────────────────────────────
+         CoreBrain intentionally does NOT request network access.
+         All AI, storage, and retrieval happen on-device.
+         If cloud backup is ever added it will require an explicit user
+         opt-in and a separate entitlement review.
+    ──────────────────────────────────────────────────────────────────────── -->
+
+    <!-- Restrict all arbitrary loads — no HTTP/HTTPS outbound traffic. -->
+    <key>NSAppTransportSecurity</key>
+    <dict>
+        <key>NSAllowsArbitraryLoads</key>
+        <false/>
+    </dict>
+
+    <!-- ── Privacy Usage Descriptions ───────────────────────────────────────
+         Required by App Store review. All descriptions explain that data
+         stays on-device.
+    ──────────────────────────────────────────────────────────────────────── -->
+
+    <!-- Microphone — voice journaling -->
+    <key>NSMicrophoneUsageDescription</key>
+    <string>CoreBrain uses the microphone to record voice memos that are transcribed and summarised entirely on your device. No audio is ever sent to the internet.</string>
+
+    <!-- Camera — OCR / document scanning -->
+    <key>NSCameraUsageDescription</key>
+    <string>CoreBrain uses the camera to scan and extract text from documents using on-device OCR. Images are not stored or sent anywhere.</string>
+
+    <!-- Photo library — import documents -->
+    <key>NSPhotoLibraryUsageDescription</key>
+    <string>CoreBrain accesses your photo library only to import documents you select. All processing stays on your device.</string>
+
+    <!-- Calendars — agentic calendar events -->
+    <key>NSCalendarsUsageDescription</key>
+    <string>CoreBrain can create calendar events when you ask it to. All calendar data is stored locally on your device via EventKit.</string>
+
+    <!-- Reminders — agentic reminders -->
+    <key>NSRemindersUsageDescription</key>
+    <string>CoreBrain can create reminders when you ask it to. All reminder data is stored locally on your device.</string>
+
+    <!-- ── Flutter embedding ──────────────────────────────────────────────── -->
+    <key>CADisableMinimumFrameDurationOnPhone</key>
+    <true/>
+
+    <key>UIApplicationSupportsIndirectInputEvents</key>
+    <true/>
+</dict>
+</plist>
