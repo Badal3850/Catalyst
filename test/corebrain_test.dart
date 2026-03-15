@@ -45,6 +45,7 @@ void main() {
       expect(restored.id, note.id);
       expect(restored.title, note.title);
       expect(restored.filePath, note.filePath);
+      expect(restored.content, note.content);
       expect(restored.tags, note.tags);
     });
 
