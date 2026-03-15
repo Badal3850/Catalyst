@@ -20,7 +20,7 @@ dependencies:
 
   # File & document handling
   file_picker: ^8.1.2
-  share_plus: ^9.0.0
+  share_plus: ^10.1.0
 
   # Audio recording (voice journaling)
   record: ^5.1.2
