@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- CoreBrain "C" letter mark -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M66,54 C66,61.7 59.7,68 52,68 L44,68 C36.3,68 30,61.7 30,54 C30,46.3 36.3,40 44,40 L52,40 C59.7,40 66,46.3 66,54 Z
+                          M52,47 L44,47 C40.1,47 37,50.1 37,54 C37,57.9 40.1,61 44,61 L52,61 C55.9,61 59,57.9 59,54 C59,50.1 55.9,47 52,47 Z"/>
+</vector>
