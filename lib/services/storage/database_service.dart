@@ -12,7 +12,10 @@ class DatabaseService {
   Database? _db;
 
   Database get db {
-    assert(_db != null, 'DatabaseService has not been initialised. Call init().');
+    assert(
+      _db != null,
+      'DatabaseService has not been initialised. Call init().',
+    );
     return _db!;
   }
 
@@ -143,14 +146,9 @@ class DatabaseService {
     Map<String, dynamic> values,
     String where,
     List<Object?> whereArgs,
-  ) =>
-      db.update(table, values, where: where, whereArgs: whereArgs);
+  ) => db.update(table, values, where: where, whereArgs: whereArgs);
 
-  Future<int> delete(
-    String table,
-    String where,
-    List<Object?> whereArgs,
-  ) =>
+  Future<int> delete(String table, String where, List<Object?> whereArgs) =>
       db.delete(table, where: where, whereArgs: whereArgs);
 
   Future<List<Map<String, dynamic>>> query(
@@ -160,21 +158,19 @@ class DatabaseService {
     List<Object?>? whereArgs,
     String? orderBy,
     int? limit,
-  }) =>
-      db.query(
-        table,
-        columns: columns,
-        where: where,
-        whereArgs: whereArgs,
-        orderBy: orderBy,
-        limit: limit,
-      );
+  }) => db.query(
+    table,
+    columns: columns,
+    where: where,
+    whereArgs: whereArgs,
+    orderBy: orderBy,
+    limit: limit,
+  );
 
   Future<List<Map<String, dynamic>>> rawQuery(
     String sql, [
     List<Object?>? arguments,
-  ]) =>
-      db.rawQuery(sql, arguments);
+  ]) => db.rawQuery(sql, arguments);
 
   Future<void> close() async => _db?.close();
 }

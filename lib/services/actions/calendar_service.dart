@@ -19,13 +19,13 @@ class CalendarEventRequest {
   final String? location;
 
   Map<String, dynamic> toMap() => {
-        'title': title,
-        'startTimeMs': startTime.millisecondsSinceEpoch,
-        'endTimeMs': (endTime ?? startTime.add(const Duration(hours: 1)))
-            .millisecondsSinceEpoch,
-        if (description != null) 'description': description,
-        if (location != null) 'location': location,
-      };
+    'title': title,
+    'startTimeMs': startTime.millisecondsSinceEpoch,
+    'endTimeMs': (endTime ?? startTime.add(const Duration(hours: 1)))
+        .millisecondsSinceEpoch,
+    if (description != null) 'description': description,
+    if (location != null) 'location': location,
+  };
 }
 
 /// Represents a local reminder / alarm.
@@ -41,10 +41,10 @@ class ReminderRequest {
   final String? body;
 
   Map<String, dynamic> toMap() => {
-        'title': title,
-        'triggerTimeMs': triggerTime.millisecondsSinceEpoch,
-        if (body != null) 'body': body,
-      };
+    'title': title,
+    'triggerTimeMs': triggerTime.millisecondsSinceEpoch,
+    if (body != null) 'body': body,
+  };
 }
 
 /// Bridges Flutter to the native calendar and reminder APIs.
@@ -55,11 +55,13 @@ class ReminderRequest {
 /// - **iOS:** `EventKit.EKEventStore` for calendars and `UserNotifications`
 ///   for reminders.
 class CalendarService {
-  static const MethodChannel _calendarChannel =
-      MethodChannel(AppConstants.calendarChannel);
+  static const MethodChannel _calendarChannel = MethodChannel(
+    AppConstants.calendarChannel,
+  );
 
-  static const MethodChannel _reminderChannel =
-      MethodChannel(AppConstants.reminderChannel);
+  static const MethodChannel _reminderChannel = MethodChannel(
+    AppConstants.reminderChannel,
+  );
 
   /// Creates a calendar event. Returns the platform-assigned event ID, or
   /// `null` if the operation failed.
@@ -96,9 +98,7 @@ class CalendarService {
   /// Checks whether the app has calendar write permission.
   Future<bool> hasCalendarPermission() async {
     try {
-      return await _calendarChannel.invokeMethod<bool>(
-            'hasPermission',
-          ) ??
+      return await _calendarChannel.invokeMethod<bool>('hasPermission') ??
           false;
     } on PlatformException {
       return false;
@@ -108,9 +108,7 @@ class CalendarService {
   /// Requests calendar write permission from the OS.
   Future<bool> requestCalendarPermission() async {
     try {
-      return await _calendarChannel.invokeMethod<bool>(
-            'requestPermission',
-          ) ??
+      return await _calendarChannel.invokeMethod<bool>('requestPermission') ??
           false;
     } on PlatformException {
       return false;

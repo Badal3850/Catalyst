@@ -53,8 +53,10 @@ class AppTheme {
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide.none,
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: _primaryLight,
@@ -63,8 +65,10 @@ class AppTheme {
       ),
       chipTheme: ChipThemeData(
         backgroundColor: _primaryLight.withAlpha(20),
-        labelStyle:
-            const TextStyle(color: _primaryLight, fontWeight: FontWeight.w500),
+        labelStyle: const TextStyle(
+          color: _primaryLight,
+          fontWeight: FontWeight.w500,
+        ),
         side: BorderSide.none,
       ),
     );
@@ -111,8 +115,10 @@ class AppTheme {
           borderRadius: BorderRadius.circular(16),
           borderSide: BorderSide.none,
         ),
-        contentPadding:
-            const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 14,
+        ),
       ),
       floatingActionButtonTheme: const FloatingActionButtonThemeData(
         backgroundColor: _primaryDark,
@@ -121,8 +127,10 @@ class AppTheme {
       ),
       chipTheme: ChipThemeData(
         backgroundColor: _primaryDark.withAlpha(30),
-        labelStyle:
-            const TextStyle(color: _primaryDark, fontWeight: FontWeight.w500),
+        labelStyle: const TextStyle(
+          color: _primaryDark,
+          fontWeight: FontWeight.w500,
+        ),
         side: BorderSide.none,
       ),
     );

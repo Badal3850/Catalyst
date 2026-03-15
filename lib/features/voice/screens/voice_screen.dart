@@ -94,12 +94,11 @@ class _RecordingControls extends StatelessWidget {
             provider.isRecording
                 ? 'Recording… tap to stop'
                 : provider.isProcessing
-                    ? 'Transcribing…'
-                    : 'Tap to record',
+                ? 'Transcribing…'
+                : 'Tap to record',
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                  color:
-                      Theme.of(context).colorScheme.onSurface.withAlpha(180),
-                ),
+              color: Theme.of(context).colorScheme.onSurface.withAlpha(180),
+            ),
           ),
         ],
       ),
@@ -224,23 +223,25 @@ class _EmptyState extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.mic_none,
-                size: 64, color: colorScheme.primary.withAlpha(180)),
+            Icon(
+              Icons.mic_none,
+              size: 64,
+              color: colorScheme.primary.withAlpha(180),
+            ),
             const SizedBox(height: 16),
             Text(
               'No voice memos',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontWeight: FontWeight.w600),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
             Text(
               'Tap the mic to record your first memo.',
               textAlign: TextAlign.center,
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurface.withAlpha(160),
-                  ),
+                color: colorScheme.onSurface.withAlpha(160),
+              ),
             ),
           ],
         ),

@@ -58,7 +58,8 @@ class LlmService {
 
   /// Summarises [text] into concise bullet points.
   Future<String> summarise(String text) async {
-    final prompt = '''
+    final prompt =
+        '''
 Summarise the following text into concise bullet points. Be brief.
 
 Text:

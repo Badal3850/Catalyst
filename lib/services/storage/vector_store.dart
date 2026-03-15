@@ -76,11 +76,7 @@ class VectorStore {
 
   /// Deletes all chunks associated with [sourceId].
   Future<void> deleteBySource(String sourceId) async {
-    await databaseService.delete(
-      _table,
-      'source_id = ?',
-      [sourceId],
-    );
+    await databaseService.delete(_table, 'source_id = ?', [sourceId]);
   }
 
   // ── Read ──────────────────────────────────────────────────────────────────
@@ -100,8 +96,10 @@ class VectorStore {
     final scored = <({VectorChunk chunk, double score})>[];
     for (final row in rows) {
       final blobBytes = row['vector'] as Uint8List;
-      final storedVector =
-          Float32List.view(blobBytes.buffer, blobBytes.offsetInBytes);
+      final storedVector = Float32List.view(
+        blobBytes.buffer,
+        blobBytes.offsetInBytes,
+      );
 
       final score = _cosineSimilarity(queryVector, storedVector);
       scored.add((

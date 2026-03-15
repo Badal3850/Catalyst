@@ -25,10 +25,10 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
   @override
   void initState() {
     super.initState();
-    _titleController =
-        TextEditingController(text: widget.note?.title ?? '');
-    _contentController =
-        TextEditingController(text: widget.note?.content ?? '');
+    _titleController = TextEditingController(text: widget.note?.title ?? '');
+    _contentController = TextEditingController(
+      text: widget.note?.content ?? '',
+    );
 
     _titleController.addListener(_markDirty);
     _contentController.addListener(_markDirty);
@@ -48,9 +48,9 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
   Future<void> _save() async {
     final title = _titleController.text.trim();
     if (title.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Please add a title')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('Please add a title')));
       return;
     }
 
@@ -62,10 +62,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
         content: _contentController.text,
       );
     } else {
-      await provider.createNote(
-        title: title,
-        content: _contentController.text,
-      );
+      await provider.createNote(title: title, content: _contentController.text);
     }
 
     if (mounted) Navigator.of(context).pop();
@@ -124,10 +121,9 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
           children: [
             TextField(
               controller: _titleController,
-              style: Theme.of(context)
-                  .textTheme
-                  .titleLarge
-                  ?.copyWith(fontWeight: FontWeight.w700),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
               decoration: const InputDecoration(
                 hintText: 'Title',
                 border: InputBorder.none,
@@ -147,10 +143,7 @@ class _NoteEditorScreenState extends State<NoteEditorScreen> {
                   border: InputBorder.none,
                   filled: false,
                 ),
-                style: const TextStyle(
-                  fontSize: 15,
-                  height: 1.6,
-                ),
+                style: const TextStyle(fontSize: 15, height: 1.6),
               ),
             ),
           ],

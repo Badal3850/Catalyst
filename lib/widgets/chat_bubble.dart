@@ -16,8 +16,7 @@ class ChatBubble extends StatelessWidget {
     }
 
     return Align(
-      alignment:
-          message.isUser ? Alignment.centerRight : Alignment.centerLeft,
+      alignment: message.isUser ? Alignment.centerRight : Alignment.centerLeft,
       child: ConstrainedBox(
         constraints: BoxConstraints(
           maxWidth: MediaQuery.of(context).size.width * 0.78,
@@ -99,8 +98,8 @@ class _SourcesLabel extends StatelessWidget {
         Text(
           '${sourceIds.length} source${sourceIds.length == 1 ? '' : 's'}',
           style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                color: colorScheme.onSurface.withAlpha(140),
-              ),
+            color: colorScheme.onSurface.withAlpha(140),
+          ),
         ),
       ],
     );

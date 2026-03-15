@@ -10,14 +10,13 @@ class VoiceMemo {
   });
 
   factory VoiceMemo.fromMap(Map<String, dynamic> map) => VoiceMemo(
-        id: map['id'] as String,
-        audioPath: map['audio_path'] as String,
-        createdAt:
-            DateTime.fromMillisecondsSinceEpoch(map['created_at'] as int),
-        durationSecs: map['duration_secs'] as int,
-        transcript: map['transcript'] as String? ?? '',
-        summary: map['summary'] as String? ?? '',
-      );
+    id: map['id'] as String,
+    audioPath: map['audio_path'] as String,
+    createdAt: DateTime.fromMillisecondsSinceEpoch(map['created_at'] as int),
+    durationSecs: map['duration_secs'] as int,
+    transcript: map['transcript'] as String? ?? '',
+    summary: map['summary'] as String? ?? '',
+  );
 
   final String id;
   final String audioPath;
@@ -37,24 +36,20 @@ class VoiceMemo {
   }
 
   Map<String, dynamic> toMap() => {
-        'id': id,
-        'audio_path': audioPath,
-        'created_at': createdAt.millisecondsSinceEpoch,
-        'duration_secs': durationSecs,
-        'transcript': transcript,
-        'summary': summary,
-      };
+    'id': id,
+    'audio_path': audioPath,
+    'created_at': createdAt.millisecondsSinceEpoch,
+    'duration_secs': durationSecs,
+    'transcript': transcript,
+    'summary': summary,
+  };
 
-  VoiceMemo copyWith({
-    String? transcript,
-    String? summary,
-  }) =>
-      VoiceMemo(
-        id: id,
-        audioPath: audioPath,
-        createdAt: createdAt,
-        durationSecs: durationSecs,
-        transcript: transcript ?? this.transcript,
-        summary: summary ?? this.summary,
-      );
+  VoiceMemo copyWith({String? transcript, String? summary}) => VoiceMemo(
+    id: id,
+    audioPath: audioPath,
+    createdAt: createdAt,
+    durationSecs: durationSecs,
+    transcript: transcript ?? this.transcript,
+    summary: summary ?? this.summary,
+  );
 }

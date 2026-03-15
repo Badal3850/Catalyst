@@ -20,8 +20,9 @@ class _NotesScreenState extends State<NotesScreen> {
   @override
   void initState() {
     super.initState();
-    WidgetsBinding.instance
-        .addPostFrameCallback((_) => context.read<NotesProvider>().loadNotes());
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => context.read<NotesProvider>().loadNotes(),
+    );
   }
 
   @override
@@ -42,8 +43,7 @@ class _NotesScreenState extends State<NotesScreen> {
                   hintText: 'Search notes…',
                   border: InputBorder.none,
                 ),
-                onChanged: (q) =>
-                    context.read<NotesProvider>().searchFts(q),
+                onChanged: (q) => context.read<NotesProvider>().searchFts(q),
               )
             : const Text('Notes'),
         actions: [
@@ -78,8 +78,7 @@ class _NotesScreenState extends State<NotesScreen> {
           return ListView.builder(
             padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
             itemCount: items.length,
-            itemBuilder: (context, index) =>
-                _NoteCard(note: items[index]),
+            itemBuilder: (context, index) => _NoteCard(note: items[index]),
           );
         },
       ),
@@ -92,9 +91,9 @@ class _NotesScreenState extends State<NotesScreen> {
   }
 
   Future<void> _createNote(BuildContext context) async {
-    await Navigator.of(context).push<void>(
-      MaterialPageRoute(builder: (_) => const NoteEditorScreen()),
-    );
+    await Navigator.of(
+      context,
+    ).push<void>(MaterialPageRoute(builder: (_) => const NoteEditorScreen()));
   }
 }
 
@@ -123,8 +122,9 @@ class _NoteCard extends StatelessWidget {
             children: [
               Text(
                 note.title,
-                style: theme.textTheme.titleMedium
-                    ?.copyWith(fontWeight: FontWeight.w600),
+                style: theme.textTheme.titleMedium?.copyWith(
+                  fontWeight: FontWeight.w600,
+                ),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -144,13 +144,15 @@ class _NoteCard extends StatelessWidget {
                 Wrap(
                   spacing: 6,
                   children: note.tags
-                      .map((tag) => Chip(
-                            label: Text(tag),
-                            materialTapTargetSize:
-                                MaterialTapTargetSize.shrinkWrap,
-                            padding: EdgeInsets.zero,
-                            visualDensity: VisualDensity.compact,
-                          ))
+                      .map(
+                        (tag) => Chip(
+                          label: Text(tag),
+                          materialTapTargetSize:
+                              MaterialTapTargetSize.shrinkWrap,
+                          padding: EdgeInsets.zero,
+                          visualDensity: VisualDensity.compact,
+                        ),
+                      )
                       .toList(),
                 ),
               ],
@@ -176,22 +178,24 @@ class _EmptyState extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.note_add_outlined,
-                size: 64, color: colorScheme.primary.withAlpha(180)),
+            Icon(
+              Icons.note_add_outlined,
+              size: 64,
+              color: colorScheme.primary.withAlpha(180),
+            ),
             const SizedBox(height: 16),
             Text(
               'No notes yet',
-              style: Theme.of(context)
-                  .textTheme
-                  .titleMedium
-                  ?.copyWith(fontWeight: FontWeight.w600),
+              style: Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w600),
             ),
             const SizedBox(height: 8),
             Text(
               'Tap + to create your first note.',
               style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                    color: colorScheme.onSurface.withAlpha(160),
-                  ),
+                color: colorScheme.onSurface.withAlpha(160),
+              ),
             ),
           ],
         ),

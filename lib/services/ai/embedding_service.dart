@@ -8,9 +8,7 @@ import '../../core/constants.dart';
 /// (e.g. via TensorFlow Lite). The stub returns a zero-vector so that the
 /// rest of the app remains usable before the embedding model is configured.
 class EmbeddingService {
-  EmbeddingService({
-    this.dimension = AppConstants.embeddingDimension,
-  });
+  EmbeddingService({this.dimension = AppConstants.embeddingDimension});
 
   /// Number of dimensions in the output embedding vector.
   final int dimension;

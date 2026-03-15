@@ -13,10 +13,7 @@ import '../../../services/actions/calendar_service.dart';
 /// - Parses LLM-extracted actions and shows confirmation prompts.
 /// - Delegates confirmed calendar/reminder actions to [CalendarService].
 class ChatProvider extends ChangeNotifier {
-  ChatProvider({
-    required this.ragPipeline,
-    required this.calendarService,
-  });
+  ChatProvider({required this.ragPipeline, required this.calendarService});
 
   final RagPipeline ragPipeline;
   final CalendarService calendarService;
@@ -101,7 +98,7 @@ class ChatProvider extends ChangeNotifier {
 
         final hasPermission =
             await calendarService.hasCalendarPermission() ||
-                await calendarService.requestCalendarPermission();
+            await calendarService.requestCalendarPermission();
         if (!hasPermission) return false;
 
         final eventId = await calendarService.createEvent(

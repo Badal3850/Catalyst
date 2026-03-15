@@ -113,12 +113,7 @@ class NotesProvider extends ChangeNotifier {
       await fileService.saveNote(p.basename(note.filePath), content);
     }
 
-    await databaseService.update(
-      'notes',
-      updated.toMap(),
-      'id = ?',
-      [id],
-    );
+    await databaseService.update('notes', updated.toMap(), 'id = ?', [id]);
 
     // Re-index the updated note.
     await vectorStore.deleteBySource(id);
@@ -130,8 +125,10 @@ class NotesProvider extends ChangeNotifier {
 
   /// Deletes the note with [id] and all associated embeddings.
   Future<void> deleteNote(String id) async {
-    final note = _notes.firstWhere((n) => n.id == id,
-        orElse: () => throw StateError('Note $id not found'));
+    final note = _notes.firstWhere(
+      (n) => n.id == id,
+      orElse: () => throw StateError('Note $id not found'),
+    );
 
     await fileService.deleteNote(note.filePath);
     await databaseService.delete('notes', 'id = ?', [id]);

@@ -42,10 +42,7 @@ class _ActionConfirmationCardState extends State<ActionConfirmationCard> {
       decoration: BoxDecoration(
         color: colorScheme.primaryContainer.withAlpha(80),
         borderRadius: BorderRadius.circular(14),
-        border: Border.all(
-          color: colorScheme.primary.withAlpha(60),
-          width: 1,
-        ),
+        border: Border.all(color: colorScheme.primary.withAlpha(60), width: 1),
       ),
       padding: const EdgeInsets.all(14),
       child: Row(
@@ -59,23 +56,23 @@ class _ActionConfirmationCardState extends State<ActionConfirmationCard> {
                 Text(
                   _labelForType(actionType),
                   style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                        color: colorScheme.primary,
-                        fontWeight: FontWeight.w600,
-                        letterSpacing: 0.5,
-                      ),
+                    color: colorScheme.primary,
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 0.5,
+                  ),
                 ),
                 Text(
                   title,
-                  style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                        fontWeight: FontWeight.w500,
-                      ),
+                  style: Theme.of(
+                    context,
+                  ).textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w500),
                 ),
                 if (date != null)
                   Text(
                     date,
                     style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: colorScheme.onSurface.withAlpha(160),
-                        ),
+                      color: colorScheme.onSurface.withAlpha(160),
+                    ),
                   ),
               ],
             ),
@@ -88,11 +85,11 @@ class _ActionConfirmationCardState extends State<ActionConfirmationCard> {
   }
 
   String _labelForType(String type) => switch (type) {
-        'calendar_event' => 'CALENDAR EVENT',
-        'reminder' => 'REMINDER',
-        'file_save' => 'SAVE FILE',
-        _ => type.toUpperCase(),
-      };
+    'calendar_event' => 'CALENDAR EVENT',
+    'reminder' => 'REMINDER',
+    'file_save' => 'SAVE FILE',
+    _ => type.toUpperCase(),
+  };
 }
 
 // ── Action icon ───────────────────────────────────────────────────────────────
@@ -138,26 +135,31 @@ class _ActionButton extends StatelessWidget {
 
     return switch (state) {
       _CardState.pending => FilledButton(
-          onPressed: onConfirm,
-          style: FilledButton.styleFrom(
-            padding:
-                const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
-            visualDensity: VisualDensity.compact,
-          ),
-          child: const Text('Add'),
+        onPressed: onConfirm,
+        style: FilledButton.styleFrom(
+          padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
+          visualDensity: VisualDensity.compact,
         ),
+        child: const Text('Add'),
+      ),
       _CardState.loading => SizedBox(
-          width: 24,
-          height: 24,
-          child: CircularProgressIndicator(
-            strokeWidth: 2.5,
-            color: colorScheme.primary,
-          ),
+        width: 24,
+        height: 24,
+        child: CircularProgressIndicator(
+          strokeWidth: 2.5,
+          color: colorScheme.primary,
         ),
-      _CardState.done => Icon(Icons.check_circle,
-          color: Colors.green.shade600, size: 26),
-      _CardState.error =>
-        Icon(Icons.error_outline, color: colorScheme.error, size: 26),
+      ),
+      _CardState.done => Icon(
+        Icons.check_circle,
+        color: Colors.green.shade600,
+        size: 26,
+      ),
+      _CardState.error => Icon(
+        Icons.error_outline,
+        color: colorScheme.error,
+        size: 26,
+      ),
     };
   }
 }

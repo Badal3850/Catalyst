@@ -10,10 +10,7 @@ enum RecordingState { idle, recording, processing }
 
 /// Manages voice memo recording, transcription, and AI summarisation.
 class VoiceProvider extends ChangeNotifier {
-  VoiceProvider({
-    required this.databaseService,
-    required this.llmService,
-  });
+  VoiceProvider({required this.databaseService, required this.llmService});
 
   final DatabaseService databaseService;
   final LlmService llmService;

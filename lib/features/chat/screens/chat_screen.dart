@@ -55,8 +55,7 @@ class _ChatScreenState extends State<ChatScreen> {
           IconButton(
             icon: const Icon(Icons.delete_sweep_outlined),
             tooltip: 'Clear conversation',
-            onPressed: () =>
-                context.read<ChatProvider>().clearConversation(),
+            onPressed: () => context.read<ChatProvider>().clearConversation(),
           ),
         ],
       ),
@@ -118,10 +117,7 @@ class _MessageList extends StatelessWidget {
 // ── Input bar ─────────────────────────────────────────────────────────────────
 
 class _InputBar extends StatelessWidget {
-  const _InputBar({
-    required this.controller,
-    required this.onSend,
-  });
+  const _InputBar({required this.controller, required this.onSend});
 
   final TextEditingController controller;
   final VoidCallback onSend;
@@ -190,24 +186,26 @@ class _EmptyState extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.psychology_outlined,
-                size: 72, color: colorScheme.primary.withAlpha(180)),
+            Icon(
+              Icons.psychology_outlined,
+              size: 72,
+              color: colorScheme.primary.withAlpha(180),
+            ),
             const SizedBox(height: 16),
             Text(
               'Your private AI brain',
-              style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                    fontWeight: FontWeight.w700,
-                  ),
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w700),
             ),
             const SizedBox(height: 8),
             Text(
               'Ask anything about your notes, '
               'or describe an action to take.',
               textAlign: TextAlign.center,
-              style: Theme.of(context)
-                  .textTheme
-                  .bodyMedium
-                  ?.copyWith(color: colorScheme.onSurface.withAlpha(160)),
+              style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+                color: colorScheme.onSurface.withAlpha(160),
+              ),
             ),
           ],
         ),

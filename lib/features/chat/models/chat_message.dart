@@ -10,10 +10,7 @@ class ChatMessage {
     this.isLoading = false,
   });
 
-  factory ChatMessage.user({
-    required String id,
-    required String text,
-  }) =>
+  factory ChatMessage.user({required String id, required String text}) =>
       ChatMessage(
         id: id,
         role: MessageRole.user,
@@ -26,23 +23,22 @@ class ChatMessage {
     required String text,
     List<String> sources = const [],
     List<Map<String, dynamic>> suggestedActions = const [],
-  }) =>
-      ChatMessage(
-        id: id,
-        role: MessageRole.assistant,
-        text: text,
-        timestamp: DateTime.now(),
-        sources: sources,
-        suggestedActions: suggestedActions,
-      );
+  }) => ChatMessage(
+    id: id,
+    role: MessageRole.assistant,
+    text: text,
+    timestamp: DateTime.now(),
+    sources: sources,
+    suggestedActions: suggestedActions,
+  );
 
   factory ChatMessage.loading({required String id}) => ChatMessage(
-        id: id,
-        role: MessageRole.assistant,
-        text: '',
-        timestamp: DateTime.now(),
-        isLoading: true,
-      );
+    id: id,
+    role: MessageRole.assistant,
+    text: '',
+    timestamp: DateTime.now(),
+    isLoading: true,
+  );
 
   final String id;
   final MessageRole role;

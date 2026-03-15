@@ -10,8 +10,7 @@ import '../../core/constants.dart';
 /// documents. All files live inside the app's private storage so no
 /// `READ_EXTERNAL_STORAGE` permission is required.
 class FileService {
-  static const MethodChannel _channel =
-      MethodChannel(AppConstants.fileChannel);
+  static const MethodChannel _channel = MethodChannel(AppConstants.fileChannel);
 
   // ── Directory helpers ─────────────────────────────────────────────────────
 
@@ -24,11 +23,9 @@ class FileService {
     return dir;
   }
 
-  Future<Directory> get notesDir =>
-      _ensureSubDir(AppConstants.notesFolderName);
+  Future<Directory> get notesDir => _ensureSubDir(AppConstants.notesFolderName);
 
-  Future<Directory> get voiceDir =>
-      _ensureSubDir(AppConstants.voiceFolderName);
+  Future<Directory> get voiceDir => _ensureSubDir(AppConstants.voiceFolderName);
 
   Future<Directory> get documentsDir =>
       _ensureSubDir(AppConstants.documentsFolderName);
@@ -62,18 +59,14 @@ class FileService {
   /// Copies [sourceFile] into the app's documents directory.
   Future<File> importDocument(File sourceFile) async {
     final dir = await documentsDir;
-    final dest =
-        File(p.join(dir.path, p.basename(sourceFile.path)));
+    final dest = File(p.join(dir.path, p.basename(sourceFile.path)));
     return sourceFile.copy(dest.path);
   }
 
   /// Lists all files inside [documentsDir].
   Future<List<File>> listDocuments() async {
     final dir = await documentsDir;
-    return dir
-        .listSync()
-        .whereType<File>()
-        .toList();
+    return dir.listSync().whereType<File>().toList();
   }
 
   // ── CSV / Data export ─────────────────────────────────────────────────────

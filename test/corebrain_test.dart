@@ -125,15 +125,13 @@ void main() {
   // ── ChatMessage model ──────────────────────────────────────────────────────
   group('ChatMessage model', () {
     test('user factory creates correct role', () {
-      final msg =
-          ChatMessage.user(id: 'msg-1', text: 'Hello');
+      final msg = ChatMessage.user(id: 'msg-1', text: 'Hello');
       expect(msg.isUser, isTrue);
       expect(msg.isAssistant, isFalse);
     });
 
     test('assistant factory creates correct role', () {
-      final msg =
-          ChatMessage.assistant(id: 'msg-2', text: 'Hi there');
+      final msg = ChatMessage.assistant(id: 'msg-2', text: 'Hi there');
       expect(msg.isAssistant, isTrue);
       expect(msg.isUser, isFalse);
     });
