@@ -75,7 +75,7 @@ class FileService {
   Future<void> appendCsvRow(String filename, List<String> row) async {
     final dir = await documentsDir;
     final file = File(p.join(dir.path, filename));
-    final line = row.map(_escapeCsv).join(',') + '\n';
+    final line = '${row.map(_escapeCsv).join(',')}\n';
     await file.writeAsString(line, mode: FileMode.append, flush: true);
   }
 

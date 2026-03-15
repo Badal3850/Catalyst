@@ -141,7 +141,7 @@ class _TypingIndicatorState extends State<_TypingIndicator>
     final color = Theme.of(context).colorScheme.onSurface.withAlpha(140);
     return AnimatedBuilder(
       animation: _controller,
-      builder: (_, __) {
+      builder: (_, _) {
         return Row(
           mainAxisSize: MainAxisSize.min,
           children: List.generate(3, (i) {
