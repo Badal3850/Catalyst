@@ -89,9 +89,10 @@ class ChatProvider extends ChangeNotifier {
 
         DateTime startTime;
         try {
-          startTime = dateStr != null
-              ? DateTime.parse(dateStr)
-              : DateTime.now().add(const Duration(days: 1));
+          startTime =
+              dateStr != null
+                  ? DateTime.parse(dateStr)
+                  : DateTime.now().add(const Duration(days: 1));
         } catch (_) {
           startTime = DateTime.now().add(const Duration(days: 1));
         }
@@ -117,9 +118,10 @@ class ChatProvider extends ChangeNotifier {
 
         DateTime triggerTime;
         try {
-          triggerTime = dateStr != null
-              ? DateTime.parse(dateStr)
-              : DateTime.now().add(const Duration(hours: 1));
+          triggerTime =
+              dateStr != null
+                  ? DateTime.parse(dateStr)
+                  : DateTime.now().add(const Duration(hours: 1));
         } catch (_) {
           triggerTime = DateTime.now().add(const Duration(hours: 1));
         }

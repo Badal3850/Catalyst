@@ -15,6 +15,7 @@ android/key.properties
 android/app/debug/
 android/app/profile/
 android/app/release/
+android/app/src/main/java/io/flutter/plugins/GeneratedPluginRegistrant.java
 **/*.keystore
 **/*.jks
 
@@ -23,6 +24,8 @@ ios/Pods/
 ios/.symlinks/
 ios/Flutter/Flutter.framework
 ios/Flutter/Flutter.podspec
+ios/Flutter/ephemeral/
+ios/Flutter/flutter_export_environment.sh
 ios/Runner/GeneratedPluginRegistrant.*
 ios/Flutter/Generated.xcconfig
 ios/Flutter/app.flx

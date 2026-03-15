@@ -48,24 +48,27 @@ Future<void> main() async {
 
         // Feature providers.
         ChangeNotifierProvider(
-          create: (context) => ChatProvider(
-            ragPipeline: context.read<RagPipeline>(),
-            calendarService: context.read<CalendarService>(),
-          ),
+          create:
+              (context) => ChatProvider(
+                ragPipeline: context.read<RagPipeline>(),
+                calendarService: context.read<CalendarService>(),
+              ),
         ),
         ChangeNotifierProvider(
-          create: (context) => NotesProvider(
-            databaseService: context.read<DatabaseService>(),
-            embeddingService: context.read<EmbeddingService>(),
-            vectorStore: context.read<VectorStore>(),
-            fileService: context.read<FileService>(),
-          ),
+          create:
+              (context) => NotesProvider(
+                databaseService: context.read<DatabaseService>(),
+                embeddingService: context.read<EmbeddingService>(),
+                vectorStore: context.read<VectorStore>(),
+                fileService: context.read<FileService>(),
+              ),
         ),
         ChangeNotifierProvider(
-          create: (context) => VoiceProvider(
-            databaseService: context.read<DatabaseService>(),
-            llmService: context.read<LlmService>(),
-          ),
+          create:
+              (context) => VoiceProvider(
+                databaseService: context.read<DatabaseService>(),
+                llmService: context.read<LlmService>(),
+              ),
         ),
       ],
       child: const CoreBrainApp(),

@@ -32,9 +32,10 @@ class _VoiceScreenState extends State<VoiceScreen> {
               _RecordingControls(provider: provider),
               const Divider(height: 1),
               Expanded(
-                child: provider.memos.isEmpty
-                    ? const _EmptyState()
-                    : _MemoList(memos: provider.memos),
+                child:
+                    provider.memos.isEmpty
+                        ? const _EmptyState()
+                        : _MemoList(memos: provider.memos),
               ),
             ],
           );
@@ -161,8 +162,8 @@ class _MemoCard extends StatelessWidget {
                 const SizedBox(width: 8),
                 IconButton(
                   icon: const Icon(Icons.delete_outline, size: 20),
-                  onPressed: () =>
-                      context.read<VoiceProvider>().deleteMemo(memo.id),
+                  onPressed:
+                      () => context.read<VoiceProvider>().deleteMemo(memo.id),
                   tooltip: 'Delete',
                   visualDensity: VisualDensity.compact,
                 ),

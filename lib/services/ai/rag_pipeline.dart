@@ -99,8 +99,7 @@ Available action types: calendar_event, reminder, file_save.
     }
 
     // 4. Build prompt.
-    final prompt =
-        '''
+    final prompt = '''
 $_systemPrompt
 
 <context>
@@ -119,15 +118,16 @@ CoreBrain:''';
 
     return RagResult(
       answer: cleanAnswer,
-      sources: chunks
-          .map(
-            (c) => RetrievedChunk(
-              sourceId: c.sourceId,
-              text: c.text,
-              score: c.score,
-            ),
-          )
-          .toList(),
+      sources:
+          chunks
+              .map(
+                (c) => RetrievedChunk(
+                  sourceId: c.sourceId,
+                  text: c.text,
+                  score: c.score,
+                ),
+              )
+              .toList(),
       suggestedActions: actions,
     );
   }

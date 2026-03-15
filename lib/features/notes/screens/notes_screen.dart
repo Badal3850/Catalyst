@@ -35,17 +35,18 @@ class _NotesScreenState extends State<NotesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: _isSearching
-            ? TextField(
-                controller: _searchController,
-                autofocus: true,
-                decoration: const InputDecoration(
-                  hintText: 'Search notes…',
-                  border: InputBorder.none,
-                ),
-                onChanged: (q) => context.read<NotesProvider>().searchFts(q),
-              )
-            : const Text('Notes'),
+        title:
+            _isSearching
+                ? TextField(
+                  controller: _searchController,
+                  autofocus: true,
+                  decoration: const InputDecoration(
+                    hintText: 'Search notes…',
+                    border: InputBorder.none,
+                  ),
+                  onChanged: (q) => context.read<NotesProvider>().searchFts(q),
+                )
+                : const Text('Notes'),
         actions: [
           IconButton(
             icon: Icon(_isSearching ? Icons.close : Icons.search),
@@ -65,9 +66,10 @@ class _NotesScreenState extends State<NotesScreen> {
             return const Center(child: CircularProgressIndicator());
           }
 
-          final items = _isSearching && _searchController.text.isNotEmpty
-              ? provider.searchResults
-              : provider.notes;
+          final items =
+              _isSearching && _searchController.text.isNotEmpty
+                  ? provider.searchResults
+                  : provider.notes;
 
           if (items.isEmpty) {
             return _isSearching
@@ -112,9 +114,10 @@ class _NoteCard extends StatelessWidget {
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
       child: InkWell(
         borderRadius: BorderRadius.circular(16),
-        onTap: () => Navigator.of(context).push<void>(
-          MaterialPageRoute(builder: (_) => NoteEditorScreen(note: note)),
-        ),
+        onTap:
+            () => Navigator.of(context).push<void>(
+              MaterialPageRoute(builder: (_) => NoteEditorScreen(note: note)),
+            ),
         child: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -143,17 +146,18 @@ class _NoteCard extends StatelessWidget {
                 const SizedBox(height: 8),
                 Wrap(
                   spacing: 6,
-                  children: note.tags
-                      .map(
-                        (tag) => Chip(
-                          label: Text(tag),
-                          materialTapTargetSize:
-                              MaterialTapTargetSize.shrinkWrap,
-                          padding: EdgeInsets.zero,
-                          visualDensity: VisualDensity.compact,
-                        ),
-                      )
-                      .toList(),
+                  children:
+                      note.tags
+                          .map(
+                            (tag) => Chip(
+                              label: Text(tag),
+                              materialTapTargetSize:
+                                  MaterialTapTargetSize.shrinkWrap,
+                              padding: EdgeInsets.zero,
+                              visualDensity: VisualDensity.compact,
+                            ),
+                          )
+                          .toList(),
                 ),
               ],
             ],

@@ -21,8 +21,9 @@ class CalendarEventRequest {
   Map<String, dynamic> toMap() => {
     'title': title,
     'startTimeMs': startTime.millisecondsSinceEpoch,
-    'endTimeMs': (endTime ?? startTime.add(const Duration(hours: 1)))
-        .millisecondsSinceEpoch,
+    'endTimeMs':
+        (endTime ?? startTime.add(const Duration(hours: 1)))
+            .millisecondsSinceEpoch,
     if (description != null) 'description': description,
     if (location != null) 'location': location,
   };

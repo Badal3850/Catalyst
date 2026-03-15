@@ -101,8 +101,10 @@ class _MessageList extends StatelessWidget {
                   ...msg.suggestedActions.map(
                     (action) => ActionConfirmationCard(
                       action: action,
-                      onConfirm: () =>
-                          context.read<ChatProvider>().executeAction(action),
+                      onConfirm:
+                          () => context.read<ChatProvider>().executeAction(
+                            action,
+                          ),
                     ),
                   ),
               ],
@@ -147,23 +149,24 @@ class _InputBar extends StatelessWidget {
             const SizedBox(width: 8),
             AnimatedSwitcher(
               duration: const Duration(milliseconds: 200),
-              child: isTyping
-                  ? Padding(
-                      padding: const EdgeInsets.all(12),
-                      child: SizedBox(
-                        width: 24,
-                        height: 24,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2.5,
-                          color: colorScheme.primary,
+              child:
+                  isTyping
+                      ? Padding(
+                        padding: const EdgeInsets.all(12),
+                        child: SizedBox(
+                          width: 24,
+                          height: 24,
+                          child: CircularProgressIndicator(
+                            strokeWidth: 2.5,
+                            color: colorScheme.primary,
+                          ),
                         ),
+                      )
+                      : IconButton.filled(
+                        icon: const Icon(Icons.send),
+                        onPressed: onSend,
+                        tooltip: 'Send',
                       ),
-                    )
-                  : IconButton.filled(
-                      icon: const Icon(Icons.send),
-                      onPressed: onSend,
-                      tooltip: 'Send',
-                    ),
             ),
           ],
         ),
