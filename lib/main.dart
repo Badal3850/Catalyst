@@ -31,8 +31,8 @@ Future<void> main() async {
 
     vectorStore = VectorStore(databaseService: databaseService);
     await vectorStore.init();
-  } catch (e) {
-    initError = e.toString();
+  } catch (e, stackTrace) {
+    initError = '$e\n$stackTrace';
   }
 
   final llmService = LlmService();
@@ -42,16 +42,13 @@ Future<void> main() async {
 
   // If database initialisation failed, show an error screen instead of
   // crashing silently on the splash screen.
-  if (databaseService == null ||
-      !databaseService.isInitialised ||
-      vectorStore == null ||
-      initError != null) {
-    runApp(_InitErrorApp(error: initError ?? 'Database failed to initialise'));
+  if (initError != null) {
+    runApp(_InitErrorApp(error: initError));
     return;
   }
 
   final ragPipeline = RagPipeline(
-    vectorStore: vectorStore,
+    vectorStore: vectorStore!,
     llmService: llmService,
     embeddingService: embeddingService,
   );
@@ -60,8 +57,8 @@ Future<void> main() async {
     MultiProvider(
       providers: [
         // Services — exposed so nested providers can access them.
-        Provider<DatabaseService>.value(value: databaseService),
-        Provider<VectorStore>.value(value: vectorStore),
+        Provider<DatabaseService>.value(value: databaseService!),
+        Provider<VectorStore>.value(value: vectorStore!),
         Provider<LlmService>.value(value: llmService),
         Provider<EmbeddingService>.value(value: embeddingService),
         Provider<RagPipeline>.value(value: ragPipeline),
