@@ -16,30 +16,49 @@ import 'services/actions/file_service.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialise core services.
-  final databaseService = DatabaseService();
-  await databaseService.init();
+  // Initialise core services inside a try-catch so that runApp() is always
+  // reached. Without this, any exception thrown during initialisation
+  // (e.g. SQLite FTS5 not supported on the device, path_provider failure)
+  // would leave the app stuck on the native splash screen because Flutter
+  // never renders its first frame.
+  DatabaseService? databaseService;
+  VectorStore? vectorStore;
+  String? initError;
 
-  final vectorStore = VectorStore(databaseService: databaseService);
-  await vectorStore.init();
+  try {
+    databaseService = DatabaseService();
+    await databaseService.init();
+
+    vectorStore = VectorStore(databaseService: databaseService);
+    await vectorStore.init();
+  } catch (e, stackTrace) {
+    initError = '$e\n$stackTrace';
+  }
 
   final llmService = LlmService();
   final embeddingService = EmbeddingService();
+  final calendarService = CalendarService();
+  final fileService = FileService();
+
+  // If database initialisation failed, show an error screen instead of
+  // crashing silently on the splash screen.
+  if (initError != null) {
+    runApp(_InitErrorApp(error: initError));
+    return;
+  }
+
   final ragPipeline = RagPipeline(
-    vectorStore: vectorStore,
+    vectorStore: vectorStore!,
     llmService: llmService,
     embeddingService: embeddingService,
   );
-
-  final calendarService = CalendarService();
-  final fileService = FileService();
 
   runApp(
     MultiProvider(
       providers: [
         // Services — exposed so nested providers can access them.
-        Provider<DatabaseService>.value(value: databaseService),
-        Provider<VectorStore>.value(value: vectorStore),
+        Provider<DatabaseService>.value(value: databaseService!),
+        Provider<VectorStore>.value(value: vectorStore!),
         Provider<LlmService>.value(value: llmService),
         Provider<EmbeddingService>.value(value: embeddingService),
         Provider<RagPipeline>.value(value: ragPipeline),
@@ -74,4 +93,43 @@ Future<void> main() async {
       child: const CoreBrainApp(),
     ),
   );
+}
+
+/// Minimal error app shown when core services fail to initialise.
+class _InitErrorApp extends StatelessWidget {
+  const _InitErrorApp({required this.error});
+
+  final String error;
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: Padding(
+            padding: const EdgeInsets.all(32),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.error_outline, size: 64, color: Colors.red),
+                const SizedBox(height: 16),
+                const Text(
+                  'CoreBrain failed to start',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  error,
+                  style: const TextStyle(fontSize: 14, color: Colors.grey),
+                  textAlign: TextAlign.center,
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
 }

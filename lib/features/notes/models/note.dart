@@ -16,6 +16,7 @@ class Note {
     filePath: map['file_path'] as String,
     createdAt: DateTime.fromMillisecondsSinceEpoch(map['created_at'] as int),
     updatedAt: DateTime.fromMillisecondsSinceEpoch(map['updated_at'] as int),
+    content: map['content'] as String? ?? '',
     tags:
         (map['tags'] as String? ?? '')
             .split(',')
