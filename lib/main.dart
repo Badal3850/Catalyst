@@ -15,29 +15,56 @@ import 'services/actions/file_service.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  try {
+    // Initialise core services.
+    final databaseService = DatabaseService();
+    await databaseService.init();
 
-  // Initialise core services.
-  final databaseService = DatabaseService();
-  await databaseService.init();
+    final vectorStore = VectorStore(databaseService: databaseService);
+    await vectorStore.init();
 
-  final vectorStore = VectorStore(databaseService: databaseService);
-  await vectorStore.init();
+    final llmService = LlmService();
+    final embeddingService = EmbeddingService();
+    final ragPipeline = RagPipeline(
+      vectorStore: vectorStore,
+      llmService: llmService,
+      embeddingService: embeddingService,
+    );
 
-  final llmService = LlmService();
-  final embeddingService = EmbeddingService();
-  final ragPipeline = RagPipeline(
-    vectorStore: vectorStore,
-    llmService: llmService,
-    embeddingService: embeddingService,
-  );
+    final calendarService = CalendarService();
+    final fileService = FileService();
 
-  final calendarService = CalendarService();
-  final fileService = FileService();
-
-  runApp(
-    MultiProvider(
-      providers: [
-        // Services — exposed so nested providers can access them.
+    runApp(
+      MultiProvider(
+        providers: [
+          // Services  exposed so nested providers can access them.
+        ],
+        child: App(
+          databaseService: databaseService,
+          vectorStore: vectorStore,
+          llmService: llmService,
+          embeddingService: embeddingService,
+          ragPipeline: ragPipeline,
+          calendarService: calendarService,
+          fileService: fileService,
+        ),
+      ),
+    );
+  } catch (e, stack) {
+    // Print error to console and show a simple error widget
+    print('Startup error: '
+        '');
+    print(e);
+    print(stack);
+    runApp(MaterialApp(
+      home: Scaffold(
+        body: Center(
+          child: Text('Startup error:\n\n'
+              '${e.toString()}'),
+        ),
+      ),
+    ));
+  }
         Provider<DatabaseService>.value(value: databaseService),
         Provider<VectorStore>.value(value: vectorStore),
         Provider<LlmService>.value(value: llmService),
