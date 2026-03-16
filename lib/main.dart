@@ -37,7 +37,26 @@ Future<void> main() async {
     runApp(
       MultiProvider(
         providers: [
-          // Services  exposed so nested providers can access them.
+          Provider<DatabaseService>.value(value: databaseService),
+          Provider<VectorStore>.value(value: vectorStore),
+          Provider<LlmService>.value(value: llmService),
+          Provider<EmbeddingService>.value(value: embeddingService),
+          Provider<RagPipeline>.value(value: ragPipeline),
+          Provider<CalendarService>.value(value: calendarService),
+          Provider<FileService>.value(value: fileService),
+
+          // Feature providers.
+          ChangeNotifierProvider(
+            create: (context) => ChatProvider(
+              ragPipeline: context.read<RagPipeline>(),
+            ),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => NotesProvider(),
+          ),
+          ChangeNotifierProvider(
+            create: (context) => VoiceProvider(),
+          ),
         ],
         child: App(
           databaseService: databaseService,
